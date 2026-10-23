@@ -94,9 +94,15 @@ test("chaos drops frames, the wire inspector marks them, and a replay recovers t
   await open(page);
   await openChannel(page, "alerts");
   await page.getByRole("tab", { name: "Chaos" }).click();
-  await page.getByLabel(/^Drop/).fill("100");
-  await page.getByRole("button", { name: "Apply" }).click();
-  await expect(page.getByRole("status").filter({ hasText: "dropping 100%" })).toBeVisible();
+  // Wait for the panel's first poll so nothing re-renders it mid-interaction, and retry the whole gesture: on a slow runner
+  // the panel can still be settling when the slider is set.
+  await expect(page.getByText("Dropped").locator("xpath=following-sibling::dd")).toBeVisible();
+  await expect(async () => {
+    await page.getByLabel(/^Drop/).fill("100");
+    await expect(page.getByLabel(/^Drop/)).toHaveValue("100", { timeout: 1000 });
+    await page.getByRole("button", { name: "Apply" }).click();
+    await expect(page.getByRole("status").filter({ hasText: "dropping 100%" })).toBeVisible({ timeout: 3000 });
+  }).toPass({ timeout: 20_000 });
   const auth = { authorization: `Bearer ${adminToken()}` };
   for (let i = 0; i < 3; i++) {
     const r = await request.post("/api/publish", { headers: auth, data: { channel: "alerts", event: "notice", data: { level: "warn", message: `n${i}` } } });
