@@ -1,0 +1,66 @@
+{
+  "name": "@hypout/core",
+  "version": "0.1.1",
+  "description": "Zero-dependency real-time engine: RFC 6455 WebSocket codec and handshake, CRDT presence, ring-buffer replay, pub/sub broker and HP-101..106 gates. No ws, no socket.io.",
+  "license": "MIT",
+  "type": "module",
+  "author": {
+    "name": "Sagar Pinninti",
+    "url": "https://github.com/isagarpinninti"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isagarpinninti/hypout.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/isagarpinninti/hypout#readme",
+  "bugs": {
+    "url": "https://github.com/isagarpinninti/hypout/issues"
+  },
+  "keywords": [
+    "websocket",
+    "rfc6455",
+    "realtime",
+    "pubsub",
+    "presence",
+    "crdt",
+    "broker",
+    "replay",
+    "zero-dependency",
+    "socket.io-alternative"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./protocol": {
+      "types": "./dist/protocol.d.ts",
+      "import": "./dist/protocol.js",
+      "require": "./dist/protocol.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "zod": "^3.23.0 || ^4.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run && vitest run -c vitest.zod3.config.ts"
+  },
+  "devDependencies": {
+    "zod3": "npm:zod@^3.25.76"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "@hypout/react",
+  "version": "0.1.1",
+  "description": "React client for Hypout: a reconnecting WebSocket client with replay and CRDT presence, hooks, and the Studio components (topology, presence roster, wire inspector, chaos simulator).",
+  "license": "MIT",
+  "type": "module",
+  "author": {
+    "name": "Sagar Pinninti",
+    "url": "https://github.com/isagarpinninti"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isagarpinninti/hypout.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/isagarpinninti/hypout#readme",
+  "bugs": {
+    "url": "https://github.com/isagarpinninti/hypout/issues"
+  },
+  "keywords": [
+    "react",
+    "websocket",
+    "realtime",
+    "presence",
+    "crdt",
+    "hooks",
+    "pubsub"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@hypout/core": "^0.1.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "zod": "^3.23.0 || ^4.0.0"
+  },
+  "scripts": {
+    "build": "tsup && cp src/styles.css dist/styles.css",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@hypout/cli": "^0.1.1"
+  }
+}

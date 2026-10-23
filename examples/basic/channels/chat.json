@@ -1,0 +1,42 @@
+{
+  "namespace": "chat",
+  "description": "Room chat. Anyone can listen; publishing needs a token.",
+  "access": {
+    "subscribe": "public",
+    "publish": "token",
+    "presence": "public"
+  },
+  "events": {
+    "message": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "typing": {
+      "type": "object",
+      "properties": {
+        "on": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "on"
+      ]
+    }
+  },
+  "rateLimit": {
+    "capacity": 20,
+    "refillPerSecond": 5
+  },
+  "retention": {
+    "events": 200
+  }
+}

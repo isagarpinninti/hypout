@@ -1,0 +1,45 @@
+{
+  "name": "@hypout/cli",
+  "version": "0.1.1",
+  "description": "Run a self-hosted Hypout real-time server: WebSocket upgrade, pub/sub channels, CRDT presence, replay, a hash-chained audit ledger and the Studio. One command, no ws, no socket.io.",
+  "license": "MIT",
+  "type": "module",
+  "author": {
+    "name": "Sagar Pinninti",
+    "url": "https://github.com/isagarpinninti"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isagarpinninti/hypout.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/isagarpinninti/hypout#readme",
+  "bugs": {
+    "url": "https://github.com/isagarpinninti/hypout/issues"
+  },
+  "keywords": ["websocket", "realtime", "pubsub", "presence", "crdt", "cli", "self-hosted", "rfc6455"],
+  "bin": {
+    "hypout": "dist/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "studio", "README.md", "LICENSE"],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@hypout/core": "^0.1.1",
+    "zod": "^4.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  }
+}

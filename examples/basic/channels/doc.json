@@ -1,0 +1,36 @@
+{
+  "namespace": "doc",
+  "description": "Collaborative cursors and selections for a document (use channel names like doc:42).",
+  "access": {
+    "subscribe": "token",
+    "publish": "token",
+    "presence": "token"
+  },
+  "events": {
+    "cursor": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    }
+  },
+  "rateLimit": {
+    "capacity": 60,
+    "refillPerSecond": 30
+  },
+  "retention": {
+    "events": 50
+  },
+  "presence": {
+    "maxMembers": 200
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "port": 4320,
+  "host": "127.0.0.1",
+  "channels": "channels",
+  "allowedOrigins": [],
+  "maxPayload": 65536,
+  "heartbeat": {
+    "intervalMs": 30000,
+    "timeoutMs": 10000
+  }
+}

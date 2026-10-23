@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --color-bg: var(--hy-bg);
+  --color-surface: var(--hy-surface);
+  --color-raised: var(--hy-raised);
+  --color-line: var(--hy-line);
+  --color-line-strong: var(--hy-line-strong);
+  --color-ink: var(--hy-ink);
+  --color-muted: var(--hy-muted);
+  --color-faint: var(--hy-faint);
+  --color-live: var(--hy-live);
+  --color-ok: var(--hy-ok);
+  --color-warn: var(--hy-warn);
+  --color-danger: var(--hy-danger);
+}
+
+html, body { height: 100%; }
+body { margin: 0; background: var(--hy-bg); color: var(--hy-ink); font-family: var(--font-sans); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+* { border-color: var(--hy-line); scrollbar-width: thin; scrollbar-color: var(--hy-line-strong) transparent; }
+::selection { background: color-mix(in srgb, var(--hy-ink) 22%, transparent); }
+:focus-visible { outline: 2px solid var(--hy-focus); outline-offset: 2px; border-radius: 4px; }
+code, pre { font-family: var(--font-mono); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }

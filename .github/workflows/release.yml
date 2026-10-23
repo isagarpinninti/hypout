@@ -1,0 +1,43 @@
+name: Release
+# Push a tag vX.Y.Z (matching the packages' version) to publish @hypout/core, @hypout/react and @hypout/cli.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write # npm provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run e2e
+      - run: npm run smoke
+      - name: Check the tag matches the package version
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          for p in core react cli; do
+            actual=$(node -p "require('./packages/$p/package.json').version")
+            [ "$actual" = "$v" ] || { echo "packages/$p is $actual, tag is $v"; exit 1; }
+          done
+      - name: Publish (core, then react and cli, which depend on it)
+        run: |
+          npm publish -w @hypout/core --access public --provenance
+          npm publish -w @hypout/react --access public --provenance
+          npm publish -w @hypout/cli --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

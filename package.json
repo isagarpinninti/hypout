@@ -1,0 +1,70 @@
+{
+  "name": "hypout",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Hypout monorepo: a self-hosted real-time WebSocket server, CRDT presence engine and pub/sub broker, with zero networking dependencies.",
+  "scripts": {
+    "dev": "next dev",
+    "build:packages": "npm run build -w @hypout/core && npm run build -w @hypout/react",
+    "build:studio": "STUDIO_EXPORT=1 next build && node scripts/copy-studio.mjs",
+    "build": "npm run build:packages && npm run build:studio && npm run build -w @hypout/cli",
+    "typecheck": "tsc --noEmit && npm run typecheck -w @hypout/core -w @hypout/react -w @hypout/cli",
+    "lint": "eslint .",
+    "test": "npm run test -w @hypout/core -w @hypout/react -w @hypout/cli",
+    "e2e": "playwright test",
+    "bench": "node scripts/bench.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "gates": "npm run typecheck && npm run lint && npm run test && npm run build && npm run e2e && npm run smoke"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Sagar Pinninti",
+    "url": "https://github.com/isagarpinninti"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isagarpinninti/hypout.git"
+  },
+  "homepage": "https://github.com/isagarpinninti/hypout#readme",
+  "bugs": {
+    "url": "https://github.com/isagarpinninti/hypout/issues"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^10.0.1",
+    "@next/eslint-plugin-next": "^16.4.2",
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^10.13.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "fast-check": "^4.10.2",
+    "globals": "^17.13.0",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.3",
+    "tsup": "^9.0.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.72.0",
+    "vitest": "^5.0.5",
+    "zod": "^4.6.7"
+  },
+  "dependencies": {
+    "@hypout/core": "*",
+    "@hypout/react": "*",
+    "lucide-react": "^1.61.0",
+    "next": "^16.4.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
+}

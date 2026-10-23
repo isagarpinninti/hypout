@@ -1,0 +1,35 @@
+{
+  "namespace": "alerts",
+  "description": "Server-to-browser alerts. Only the server (REST or `hypout publish`) can publish.",
+  "access": {
+    "subscribe": "public",
+    "publish": "server",
+    "presence": "off"
+  },
+  "events": {
+    "notice": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warn",
+            "error"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "level",
+        "message"
+      ]
+    }
+  },
+  "retention": {
+    "events": 100
+  }
+}
