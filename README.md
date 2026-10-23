@@ -176,17 +176,17 @@ Exit codes: `0` success, `1` a check failed, `2` bad usage.
 
 ```mermaid
 flowchart LR
-  B1[Browser / app] -- ws --> S
-  B2[Browser / app] -- ws --> S
-  P[hypout publish / REST] -- http --> S
-  subgraph S[@hypout/cli process]
-    H[HTTP + upgrade handler] --> D[Frame decoder]
-    D --> BR[Broker - @hypout/core]
-    BR --> G[Gates HP-101..106]
-    BR --> R[Ring buffers]
-    BR --> C[CRDT presence]
-    BR --> L[Ledger]
-    BR --> E[Encode once, write to each socket]
+  B1["Browser or app"] -- ws --> H
+  B2["Browser or app"] -- ws --> H
+  P["hypout publish / REST"] -- http --> H
+  subgraph S["hypout process (cli + core)"]
+    H["HTTP + upgrade handler"] --> D["Frame decoder"]
+    D --> BR["Broker"]
+    BR --> G["Gates HP-101 to HP-106"]
+    BR --> R["Ring buffers"]
+    BR --> C["CRDT presence"]
+    BR --> L["Ledger"]
+    BR --> E["Encode once, write to each socket"]
   end
 ```
 
